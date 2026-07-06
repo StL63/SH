@@ -6,7 +6,7 @@
 <title>Stay7 · 셰어하우스</title>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* 프리텐다드 폰트 불러오기를 최상단으로 정렬하여 CSS 파싱 오류 해결 */
+/* 프리텐다드 폰트 불러오기 */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
 
 :root {
@@ -22,7 +22,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 ul,ol{list-style:none;}
 img{display:block;max-width:100%;}
 
-/* ========== LANDING (Reimagined for Maturity) ========== */
+/* ========== LANDING ========== */
 #landing {
   position: fixed; inset: 0; z-index: 50;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -194,7 +194,6 @@ img{display:block;max-width:100%;}
 }
 .goto-char:hover{transform:translateY(-2px);background:#3f7f96;}
 
-/* 생활규칙 여백 최소화 및 반응형 이미지 처리 통합 */
 .rules-wrap{
   flex:1 1 auto;min-height:0;background:#fff;border-radius:var(--rad-lg);
   box-shadow:var(--shadow);padding:20px;
@@ -258,7 +257,6 @@ img{display:block;max-width:100%;}
   flex:1 1 auto;padding:14px 18px;
   display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0;
 }
-/* 카드 목록 텍스트 크기 확장 및 프리텐다드 적용 완료 */
 .gc-name{font-family:'Gowun Batang',serif;font-size:20px;font-weight:700;}
 .gc-job{font-size:15px;color:var(--ink-soft);}
 .gc-quote{
@@ -340,8 +338,6 @@ img{display:block;max-width:100%;}
   width:100%;height:100%;object-fit:cover;display:none;
 }
 .slot-photo.loaded{display:block;}
-
-/* 기본 플레이스홀더 요소 숨김 설정 통합 완료 */
 .slot-placeholder{display:none;}
 
 .slot-btns{
@@ -380,7 +376,6 @@ img{display:block;max-width:100%;}
 .char-info::-webkit-scrollbar{display:none;}
 .cname-row{display:flex;align-items:baseline;gap:10px;margin-bottom:3px;}
 
-/* 상세 인물 정보 크기 확장 및 폰트 변경사항 완벽 통합 */
 .cname{font-family:'Gowun Batang',serif;font-size:32px;font-weight:700;}
 .cjob{color:var(--ink-soft);font-size:17px;}
 .cquote{font-family:'Pretendard',sans-serif;font-size:19px;font-weight:500;color:var(--sun-deep);margin:7px 0 18px;}
@@ -399,6 +394,7 @@ img{display:block;max-width:100%;}
   position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
   font-size:13px;color:var(--ink-soft);letter-spacing:.05em;
 }
+
 /* ========== SHORTCUTS VIEW ========== */
 .view-shortcuts {
   padding: 20px 36px 24px;
@@ -418,7 +414,6 @@ img{display:block;max-width:100%;}
 }
 .shortcuts-scroll::-webkit-scrollbar { display: none; }
 
-/* 단축어 기본 블록 */
 .s-block {
   background: #fff; border-radius: var(--rad-lg);
   padding: 24px 30px; box-shadow: var(--shadow);
@@ -478,7 +473,7 @@ img{display:block;max-width:100%;}
 </head>
 <body>
 
-<!-- ===== LANDING (Reimagined) ===== -->
+<!-- ===== LANDING ===== -->
 <div id="landing">
   <div class="land-bg"></div>
   <svg class="cloud ca" width="80" height="40" viewBox="0 0 160 80" aria-hidden="true">
@@ -603,7 +598,7 @@ img{display:block;max-width:100%;}
         <div class="char-idx" id="charIdx">1 / 6</div>
       </div>
     </div>
-</section> <!-- 입주민 소개 섹션 끝나는 지점 바로 아래에 추가 시작 -->
+  </section>
 
   <!-- ---- SHORTCUTS ---- -->
   <section class="view view-shortcuts" id="view-shortcuts">
@@ -622,7 +617,6 @@ img{display:block;max-width:100%;}
         <div class="s-cmd">/폰 {이름}</div>
         <div class="s-desc">해당 캐릭터의 휴대폰을 볼 수 있음</div>
         
-        <!-- 네모 상자 폰 mockup 시작 -->
         <div class="phone-box">
           <div class="phone-header">📱 임도율의 휴대폰</div>
           <div class="phone-status">08:04 📶🛜 🔋88%</div>
@@ -664,7 +658,6 @@ img{display:block;max-width:100%;}
           <div class="phone-sec">🎧최근 재생곡</div>
           <div>없음</div>
         </div>
-        <!-- 네모 상자 끝 -->
       </div>
 
       <!-- 3. /집안방송 -->
@@ -672,17 +665,15 @@ img{display:block;max-width:100%;}
         <div class="s-cmd">/집안방송</div>
         <div class="s-desc">현재 셰어하우스 내부에 대한 방송</div>
         
-        <!-- 방송 첫 번째 상자 -->
         <div class="broadcast-box">
           <div class="bc-header">📢 셰어하우스 방송</div>
           <div class="bc-item"><b>▸[육아 전선 이상 무?]</b> 임도율, 금일 아침 '유아 발달 단계별 필수 어휘 100선' 암기 테스트를 예고했습니다. 한편, 최주호 트레이너는 '맘마' 대신 '근손실'이라는 단어를 먼저 가르치려는 불순한 시도가 발각되어 아침 운동 1시간 금지 처분을 받았다는 소식입니다.</div>
-          <div class="bc-item"><b>▸[주방 소식]</b> '오늘의 셰프' 백이안 간호사, 아이의 편식 습관을 바로잡기 위해 당근과 피망을 갈아 넣은 특제 계란찜을 개발했습니다. 하지만 이를 먼저 맛본 원지섭 개발자의 평가는 "건강한 맛. 즉, 맛없다." 한 마디로 요약되었습니다. 현재 두 사람 사이의 냉기류가 주방 온도를 2도 낮추고 있습니다.</div>
+          <div class="bc-item"><b>▸[주방 소식]</b> '오늘의 셰프' 백이안 간호사, 아이의 편식 습관을 바로잡기 위해 당근และ 피망을 갈아 넣은 특제 계란찜을 개발했습니다. 하지만 이를 먼저 맛본 원지섭 개발자의 평가는 "건강한 맛. 즉, 맛없다." 한 마디로 요약되었습니다. 현재 두 사람 사이의 냉기류가 주방 온도를 2도 낮추고 있습니다.</div>
           <div class="bc-item"><b>▸[예술가의 고뇌]</b> 윤자빈 일러스트레이터, 아이를 모델로 한 '왕자님 시리즈' 24종을 완성했으나 정작 아이 본인은 공룡 그림에만 관심을 보여 깊은 상처를 받았습니다. 현재 칩거에 들어갔으며, 방문 앞에는 '슬픔. 작업 중. 간식 사절.'이라는 팻말이 붙었습니다.</div>
           <div class="bc-item"><b>▸[관찰 보고]</b> 한시우 사진작가, 지난 2주간 아이의 사진만 752장을 촬영한 것으로 밝혀져. 사진들은 '자는 모습', '밥 먹는 모습', '우는 모습', '웃는 모습' 폴더로 나뉘어 체계적으로 관리되고 있으며, 본인은 이를 '성장 기록'이라 주장하고 있습니다.</div>
           <div class="bc-notice"><b>📖전체공지:</b> 거실 소파 밑에서 유통기한이 2년 지난 초코바가 발견되었습니다. 최초 발견자인 최주호는 환호했지만, 백이안의 저지로 즉시 압수되었습니다. 입주민 여러분, 소파 밑은 쓰레기통이 아닙니다. 자발적인 청소를 촉구합니다.</div>
         </div>
 
-        <!-- 방송 두 번째 상자 -->
         <div class="broadcast-box">
           <div class="bc-header">📢 셰어하우스 방송</div>
           <div class="bc-item"><b>▸[사건]</b> 2층 화장실 변기 막힘. 용의자는 레고 듀플로. 현재까지 범행을 자백하는 이는 없음. 유력 용의자는 현장을 최초 목격한 최주호와 최근 블록 놀이에 심취한 모 어린이로 압축되는 중.</div>
@@ -723,16 +714,15 @@ img{display:block;max-width:100%;}
         </div>
       </div>
 
-      <!-- 5. /단톡방 (제목, 설명 포함 전체 블록) -->
+      <!-- 5. /단톡방 -->
       <div class="s-block">
         <div class="s-cmd">/단톡방</div>
         <div class="s-desc">셰어하우스 입주민의 단톡방 보기</div>
-      <!-- 단톡방 시작 (연속 메시지 처리 버전) -->
+        
         <div class="chat-room-box">
           <div class="cr-header">💬 (단톡방) 🏠 셰어하우스 생존자 모임</div>
           <div class="cr-body">
             
-            <!-- 최주호 (14:32) -->
             <div class="cr-line">
               <span class="cr-user">💪🏻 최주호</span>
               <div class="cr-row"><div class="cr-bubble">아니 진짜 내가 아니라니까?</div><span class="cr-time">14:32</span></div>
@@ -741,26 +731,22 @@ img{display:block;max-width:100%;}
               <div class="cr-row"><div class="cr-bubble">이게 증거다</div><span class="cr-time">14:32</span></div>
             </div>
 
-            <!-- 원지섭 (14:33) -->
             <div class="cr-line">
               <span class="cr-user">🕹️ 원지섭</span>
               <div class="cr-row"><div class="cr-bubble">그걸 왜 찍어서 여기다 올려</div><span class="cr-time">14:33</span></div>
               <div class="cr-row"><div class="cr-bubble">밥맛 떨어지게</div><span class="cr-time">14:33</span></div>
             </div>
 
-            <!-- 최주호 (14:33) -->
             <div class="cr-line">
               <span class="cr-user">💪🏻 최주호</span>
               <div class="cr-row"><div class="cr-bubble">형은 밥 먹고 있었냐?</div><span class="cr-time">14:33</span></div>
             </div>
 
-            <!-- 원지섭 (14:34) -->
             <div class="cr-line">
               <span class="cr-user">🕹️ 원지섭</span>
               <div class="cr-row"><div class="cr-bubble">아니</div><span class="cr-time">14:34</span></div>
             </div>
 
-            <!-- 임도율 (14:35) -->
             <div class="cr-line">
               <span class="cr-user">👓 임도율</span>
               <div class="cr-row"><div class="cr-bubble">최주호. 현장 보존의 원칙은 훼손하지 않는 것이다.</div><span class="cr-time">14:35</span></div>
@@ -768,7 +754,6 @@ img{display:block;max-width:100%;}
               <div class="cr-row"><div class="cr-bubble">사진 삭제하도록.</div><span class="cr-time">14:35</span></div>
             </div>
 
-            <!-- 최주호 (14:36) -->
             <div class="cr-line">
               <span class="cr-user">💪🏻 최주호</span>
               <div class="cr-row"><div class="cr-bubble">뭔소리야! 언제부터 그런 규칙이 있었는데!</div><span class="cr-time">14:36</span></div>
@@ -776,7 +761,6 @@ img{display:block;max-width:100%;}
               <div class="cr-row"><div class="cr-bubble">이안이 형 일어나면 나만 잡을 거 아냐!!</div><span class="cr-time">14:36</span></div>
             </div>
 
-            <!-- 원지섭 (14:37) -->
             <div class="cr-line">
               <span class="cr-user">🕹️ 원지섭</span>
               <div class="cr-row"><div class="cr-bubble img-bubble">[사진 첨부-손바닥 위에 올려진 카메라 렌즈캡]</div><span class="cr-time">14:37</span></div>
@@ -784,39 +768,33 @@ img{display:block;max-width:100%;}
               <div class="cr-row"><div class="cr-bubble">저녁은 생선.</div><span class="cr-time">14:37</span></div>
             </div>
 
-            <!-- 최주호 (14:38) -->
             <div class="cr-line">
               <span class="cr-user">💪🏻 최주호</span>
               <div class="cr-row"><div class="cr-bubble">오 생선구이? ㄱㅇㄷ</div><span class="cr-time">14:38</span></div>
               <div class="cr-row"><div class="cr-bubble">근데 왜 내 말은 다 씹어?</div><span class="cr-time">14:38</span></div>
             </div>
 
-            <!-- 한시우 (14:40) -->
             <div class="cr-line">
               <span class="cr-user">📷 한시우</span>
               <div class="cr-row"><div class="cr-bubble">고마워요, 형.</div><span class="cr-time">14:40</span></div>
               <div class="cr-row"><div class="cr-bubble">거기 있었구나.</div><span class="cr-time">14:40</span></div>
             </div>
 
-            <!-- 윤자빈 (14:41) -->
             <div class="cr-line">
               <span class="cr-user">🖊️ 윤자빈</span>
               <div class="cr-row"><div class="cr-bubble">으아아아아아아아아악!!!!!</div><span class="cr-time">14:41</span></div>
             </div>
 
-            <!-- 최주호 (14:41) -->
             <div class="cr-line">
               <span class="cr-user">💪🏻 최주호</span>
               <div class="cr-row"><div class="cr-bubble">?</div><span class="cr-time">14:41</span></div>
             </div>
 
-            <!-- 원지섭 (14:41) -->
             <div class="cr-line">
               <span class="cr-user">🕹️ 원지섭</span>
               <div class="cr-row"><div class="cr-bubble">쟤 또 시작이네</div><span class="cr-time">14:41</span></div>
             </div>
 
-            <!-- 임도율 (14:42) -->
             <div class="cr-line">
               <span class="cr-user">👓 임도율</span>
               <div class="cr-row"><div class="cr-bubble">윤자빈.</div><span class="cr-time">14:42</span></div>
@@ -824,7 +802,6 @@ img{display:block;max-width:100%;}
               <div class="cr-row"><div class="cr-bubble">3회 이상 경고 시 벌칙이 부과된다.</div><span class="cr-time">14:42</span></div>
             </div>
 
-            <!-- 윤자빈 (14:43) -->
             <div class="cr-line">
               <span class="cr-user">🖊️ 윤자빈</span>
               <div class="cr-row"><div class="cr-bubble img-bubble">[사진 첨부-컴퓨터 모니터 화면을 찍은 사진. 귀여운 동물 캐릭터들이 그려져 있다.]</div><span class="cr-time">14:43</span></div>
@@ -832,19 +809,16 @@ img{display:block;max-width:100%;}
               <div class="cr-row"><div class="cr-bubble">너무 귀여워서 일이 손에 안 잡혀ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ...</div><span class="cr-time">14:43</span></div>
             </div>
 
-            <!-- 최주호 (14:43) -->
             <div class="cr-line">
               <span class="cr-user">💪🏻 최주호</span>
               <div class="cr-row"><div class="cr-bubble">저게 뭔데</div><span class="cr-time">14:43</span></div>
             </div>
 
-            <!-- 윤자빈 (14:44) -->
             <div class="cr-line">
               <span class="cr-user">🖊️ 윤자빈</span>
               <div class="cr-row"><div class="cr-bubble">내 영혼과 심장을 갈아 넣은 내 자식들이라고!!!!</div><span class="cr-time">14:44</span></div>
             </div>
 
-            <!-- 백이안 (14:45) -->
             <div class="cr-line">
               <span class="cr-user">🩹 백이안</span>
               <div class="cr-row"><div class="cr-bubble">...</div><span class="cr-time">14:45</span></div>
@@ -852,31 +826,26 @@ img{display:block;max-width:100%;}
               <div class="cr-row"><div class="cr-bubble">제발... 조용히 좀...</div><span class="cr-time">14:45</span></div>
             </div>
 
-            <!-- 최주호 (14:46) -->
             <div class="cr-line">
               <span class="cr-user">💪🏻 최주호</span>
               <div class="cr-row"><div class="cr-bubble">헉</div><span class="cr-time">14:46</span></div>
             </div>
 
-            <!-- 원지섭 (14:46) -->
             <div class="cr-line">
               <span class="cr-user">🕹️ 원지섭</span>
               <div class="cr-row"><div class="cr-bubble">엄마 깼다</div><span class="cr-time">14:46</span></div>
             </div>
 
-            <!-- 임도율 (14:46) -->
             <div class="cr-line">
               <span class="cr-user">👓 임도율</span>
               <div class="cr-row"><div class="cr-bubble">...</div><span class="cr-time">14:46</span></div>
             </div>
 
-            <!-- 윤자빈 (14:47) -->
             <div class="cr-line">
               <span class="cr-user">🖊️ 윤자빈</span>
               <div class="cr-row"><div class="cr-bubble">이안이형 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 죄송해요 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</div><span class="cr-time">14:47</span></div>
             </div>
 
-            <!-- 백이안 (14:48) -->
             <div class="cr-line">
               <span class="cr-user">🩹 백이안</span>
               <div class="cr-row"><div class="cr-bubble">주호야. 2층 화장실 무슨 일이야?</div><span class="cr-time">14:48</span></div>
@@ -885,12 +854,10 @@ img{display:block;max-width:100%;}
 
           </div>
         </div>
-        <!-- 단톡방 끝 -->
       </div>
 
     </div>
   </section>
-  <!-- 추가 끝 -->
 
 </div>
 
