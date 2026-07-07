@@ -639,6 +639,38 @@ img{display:block;max-width:100%;}
     padding: 12px 20px !important;
   }
 }
+/* 모바일 환경(화면 너비 768px 이하)에만 적용되는 스타일 */
+@media screen and (max-width: 768px) {
+    /* 1. 음악 버튼 (그대로 유지) */
+    #bgmBtn {
+        bottom: auto !important; 
+        top: 24px !important;    
+        right: 15px !important;  
+        padding: 6px 10px !important; /* 버튼 여백 축소 */
+        font-size: 12px !important;   /* 글자 크기 축소 */
+        border-radius: 10px !important;
+        z-index: 9999;
+    }
+
+    /* 2. 입주민 목록 컨테이너 스크롤 설정 */
+    #gridView {
+        overflow-y: auto !important; 
+        max-height: calc(100vh - 250px) !important; 
+        gap: 15px !important; 
+        padding-bottom: 30px !important; 
+        
+        /* 🌟 새로 추가: 카드들이 억지로 빈 공간을 채우려 찌그러지지 않고 위에서부터 차곡차곡 쌓이게 함 */
+        align-content: flex-start !important; 
+    }
+
+    /* 🌟 새로 추가: 그리드뷰 안에 있는 각각의 카드들이 절대 납작해지지 않도록 방어력 부여 */
+    #gridView > div {
+        flex-shrink: 0 !important;
+    }
+    
+}
+/* 화면 드래그 긁기 및 선택 방지 */
+body {-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
 </style>
 </head>
 <body>
@@ -842,10 +874,10 @@ img{display:block;max-width:100%;}
       </div>
 
       <!-- 2. 모바일용 화면 (1x6 배열 및 새 디자인 적용) -->
-      <div class="m-view-only" style="display: none; padding: 20px 20px 100px 20px; flex-direction: column;">
-          <p class="grid-title" style="margin-bottom: 15px; font-size: 18px; color: #608695;">Stay7 입주민 소개</p>
+        <div class="m-view-only" style="display: none; padding: 5px 20px 20px 20px; flex-direction: column;">
+            <p class="grid-title" style="margin-top: 0; margin-bottom: 10px; font-size: 18px; color: #608695;">Stay7 입주민 소개</p>
           
-          <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div id="gridView" style="display: flex; flex-direction: column; gap: 12px; max-height: calc(100vh - 260px); overflow-y: auto; padding-bottom: 40px;">
           <!-- 1. 임 -->
         <div onclick="cur=0; showDetailView(); renderDetail('next');" style="display: flex; height: 70px; background: #ffffff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); overflow: hidden; cursor: pointer; position: relative;">
               <div style="width: 80px; background-color: #4A4A4A; position: relative;">
@@ -1257,6 +1289,7 @@ let slotIndex = new Array(CHARS.length).fill(0);
 /* ===================== 랜딩 ===================== */
 document.getElementById("enterBtn").addEventListener("click", () => {
   document.getElementById("landing").classList.add("out");
+  
 });
 
 /* ===================== 네비게이션 ===================== */
@@ -1429,8 +1462,8 @@ function showMTab(id, btn) {
 }
 </script>
 
-<audio id="bgmPlayer" loop preload="auto"></audio>
-<button id="bgmBtn" style="position:fixed; bottom:20px; right:20px; z-index:9999; padding:15px; background:#4F93B0; color:white; border-radius:20px; border:none; cursor:pointer;">음악 ON/OFF</button>
+<audio id="bgmPlayer" preload="auto"></audio>
+<button id="bgmBtn" style="position:fixed; bottom:20px; right:20px; z-index:9999; padding:15px; background:#4F93B0; color:white; border-radius:20px; border:none; cursor:pointer; display: none;">음악 ON/OFF</button>
 
 <script>
     const bgmList = [
@@ -1443,9 +1476,23 @@ function showMTab(id, btn) {
     const bgmBtn = document.getElementById("bgmBtn");
     const enterBtn = document.getElementById("enterBtn"); // 입주하기 버튼
 
-    // 랜덤 곡 로드
-    const randomIdx = Math.floor(Math.random() * bgmList.length);
-    audio.src = bgmList[randomIdx];
+    // 처음 들어왔을 때 랜덤 곡 로드
+    let currentIdx = Math.floor(Math.random() * bgmList.length);
+    audio.src = bgmList[currentIdx];
+
+    // 현재 곡이 끝났을 때(ended) 다른 랜덤 곡 재생
+    audio.addEventListener("ended", () => {
+        let nextIdx = Math.floor(Math.random() * bgmList.length);
+        
+        // 방금 들은 곡과 똑같은 곡이 걸리면, 다른 곡이 나올 때까지 다시 뽑기
+        while (nextIdx === currentIdx && bgmList.length > 1) {
+            nextIdx = Math.floor(Math.random() * bgmList.length);
+        }
+        
+        currentIdx = nextIdx;
+        audio.src = bgmList[currentIdx];
+        audio.play().catch(e => console.error("재생 오류:", e)); // 새로운 곡 바로 재생
+    });
 
     // [음악 ON/OFF] 버튼 동작
     if (bgmBtn) {
@@ -1464,8 +1511,40 @@ function showMTab(id, btn) {
             if (audio.paused) {
                 audio.play().catch(e => console.error("재생 오류:", e));
             }
+            bgmBtn.style.display = "block";
         });
     }
+   // 💡 [주인 인증 꼼수] 주소창 뒤에 ?owner=true 를 붙여서 접속하면 브라우저가 나를 기억합니다.
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('owner') === 'true') {
+    localStorage.setItem('isSiteOwner', 'true');
+    alert("주인님 환영합니다! 모든 차단이 해제되었습니다.");
+} else if (urlParams.get('owner') === 'clear') {
+    localStorage.removeItem('isSiteOwner'); // 다시 차단 테스트를 해보고 싶을 땐 ?owner=clear 붙이기
+    alert("주인 모드가 해제되어 다시 차단됩니다.");
+}
+
+// 🔒 내가 아닐 때(isSiteOwner가 true가 아닐 때)만 차단 작동!
+if (localStorage.getItem('isSiteOwner') !== 'true') {
+    
+    // 1. 마우스 우클릭 메뉴 방지
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    // 2. 주요 단축키 차단 (F12, Ctrl+U, Ctrl+S 등)
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "F12") {
+            e.preventDefault();
+        }
+        if (e.ctrlKey && (e.key === "u" || e.key === "U" || 
+                          e.key === "s" || e.key === "S" || 
+                          e.key === "c" || e.key === "C" ||
+                          (e.shiftKey && (e.key === "i" || e.key === "I" || e.key === "j" || e.key === "J")))) {
+            e.preventDefault();
+        }
+    });
+}
 </script>
 </body>
 </html>
