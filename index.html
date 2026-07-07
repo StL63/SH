@@ -1430,13 +1430,7 @@ function showMTab(id, btn) {
 </script>
 
 <audio id="bgmPlayer" loop preload="auto"></audio>
-
-<button id="bgmBtn" style="position:fixed; bottom:20px; right:20px; z-index:9999; padding: 10px 15px; border-radius: 20px; border:none; background:#4F93B0; color:white; cursor:pointer;">음악 ON/OFF</button>
-
-<div id="music-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <audio id="bgmPlayer" loop preload="auto"></audio>
-    <button id="bgmBtn" style="padding: 10px 20px; border-radius: 20px; border: none; background: #4F93B0; color: white; cursor: pointer; font-size: 14px;">음악 ON/OFF</button>
-</div>
+<button id="bgmBtn" style="position:fixed; bottom:20px; right:20px; z-index:9999; padding:15px; background:#4F93B0; color:white; border-radius:20px; border:none; cursor:pointer;">음악 ON/OFF</button>
 
 <script>
     const bgmList = [
@@ -1448,17 +1442,25 @@ function showMTab(id, btn) {
     const audio = document.getElementById("bgmPlayer");
     const bgmBtn = document.getElementById("bgmBtn");
 
-    // 랜덤 곡 로드
-    audio.src = bgmList[Math.floor(Math.random() * bgmList.length)];
+    // 1. 랜덤 곡 선택
+    const randomIdx = Math.floor(Math.random() * bgmList.length);
+    audio.src = bgmList[randomIdx];
+    console.log("음악 소스 로드 완료:", audio.src);
 
-    // 버튼 클릭 시 재생/정지
-    bgmBtn.addEventListener("click", function() {
+    // 2. 버튼 클릭 로그 확인
+    bgmBtn.addEventListener("click", () => {
+        console.log("버튼 클릭됨. 현재 상태 - paused:", audio.paused);
+        
         if (audio.paused) {
-            audio.play().catch(function(error) {
-                alert("재생 중 오류가 발생했습니다.");
-            });
+            audio.play()
+                .then(() => console.log("재생 성공"))
+                .catch(err => {
+                    console.error("재생 실패 이유:", err);
+                    alert("재생 실패: " + err.message);
+                });
         } else {
             audio.pause();
+            console.log("일시정지 완료");
         }
     });
 </script>
