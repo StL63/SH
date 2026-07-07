@@ -111,7 +111,15 @@ img{display:block;max-width:100%;}
 .enter-btn-new:active { transform: translateY(-1px); }
 
 /* ========== APP ========== */
-#app{position:fixed;inset:0;display:flex;flex-direction:column;}
+#app {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  height: 100dvh; /* 모바일 주소창이 열려도 한시우 카드가 잘리지 않게 높이 자동 계산 */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* 맨 바깥 프레임이 통째로 굳어버리는 현상 방지 */
+}
 .topnav{
   flex:0 0 auto;
   display:flex;align-items:center;justify-content:space-between;
@@ -124,7 +132,14 @@ img{display:block;max-width:100%;}
 .npill{padding:9px 20px;border-radius:999px;font-size:14px;font-weight:500;color:var(--ink-soft);transition:background .2s,color .2s;}
 .npill.on{background:var(--sky-deep);color:#fff;}
 
-.view{flex:1 1 auto;display:none;min-height:0;position:relative;}
+.view{
+  flex:1 1 auto;
+  display:none;
+  min-height:0;
+  position:relative;
+  flex-direction: column; /* 뷰 내부 레이아웃이 굳지 않도록 방향 설정 */
+  overflow: hidden;       /* 탭 내부에서만 스크롤이 돌도록 제어 */
+}
 .view.on{display:flex;}
 
 /* ========== INTRO VIEW ========== */
@@ -877,7 +892,7 @@ body {-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; 
         <div class="m-view-only" style="display: none; padding: 5px 20px 20px 20px; flex-direction: column;">
             <p class="grid-title" style="margin-top: 0; margin-bottom: 10px; font-size: 18px; color: #608695;">Stay7 입주민 소개</p>
           
-          <div id="gridView" style="display: flex; flex-direction: column; gap: 12px; max-height: calc(100vh - 260px); overflow-y: auto; padding-bottom: 40px;">
+          <div id="gridView" style="display: flex; flex-direction: column; gap: 12px; max-height: calc(100dvh - 260px); overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 40px;">
           <!-- 1. 임 -->
         <div onclick="cur=0; showDetailView(); renderDetail('next');" style="display: flex; height: 70px; background: #ffffff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); overflow: hidden; cursor: pointer; position: relative;">
               <div style="width: 80px; background-color: #4A4A4A; position: relative;">
