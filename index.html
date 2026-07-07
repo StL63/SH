@@ -1429,37 +1429,43 @@ function showMTab(id, btn) {
 }
 </script>
 
+<audio id="bgmPlayer" loop preload="auto"></audio>
+<button id="bgmBtn" style="position:fixed; bottom:20px; right:20px; z-index:9999; padding:15px; background:#4F93B0; color:white; border-radius:20px; border:none; cursor:pointer;">음악 ON/OFF</button>
+
 <script>
-    // 1. 변수 설정
     const bgmList = [
         "music/song1.mp3",
         "music/song2.mp3",
         "music/song3.mp3"
     ];
+    
     const audio = document.getElementById("bgmPlayer");
     const bgmBtn = document.getElementById("bgmBtn");
-    const enterBtn = document.getElementById("enterBtn"); // 'Stay7 입주하기' 버튼 가져오기
+    const enterBtn = document.getElementById("enterBtn"); // 입주하기 버튼
 
-    // 2. 랜덤 곡 선택
+    // 랜덤 곡 로드
     const randomIdx = Math.floor(Math.random() * bgmList.length);
     audio.src = bgmList[randomIdx];
-    
-    // 3. 기존 ON/OFF 버튼 기능
-    bgmBtn.addEventListener("click", () => {
-        if (audio.paused) {
-            audio.play().catch(e => console.error("재생 오류:", e));
-        } else {
-            audio.pause();
-        }
-    });
 
-    // 4. 'Stay7 입주하기' 버튼 기능 (여기 넣으시면 됩니다)
-    enterBtn.addEventListener("click", () => {
-        // 음악이 멈춰있을 때만 재생 (이미 나오고 있으면 그대로 둠)
-        if (audio.paused) {
-            audio.play().catch(e => console.error("재생 오류:", e));
-        }
-    });
+    // [음악 ON/OFF] 버튼 동작
+    if (bgmBtn) {
+        bgmBtn.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play().catch(e => console.error("재생 오류:", e));
+            } else {
+                audio.pause();
+            }
+        });
+    }
+
+    // [Stay7 입주하기] 버튼 동작
+    if (enterBtn) {
+        enterBtn.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play().catch(e => console.error("재생 오류:", e));
+            }
+        });
+    }
 </script>
 </body>
 </html>
